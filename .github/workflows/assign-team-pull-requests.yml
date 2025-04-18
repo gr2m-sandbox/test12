@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Only assign pull requests by team members, ignore pull requests from forks
-      - if: github.event.repository.fork == false
+      - if: github.event.pull_request.head.repo.full_name == github.repository
         name: Assign pull request to author
         run: gh pr edit $PULL_REQUEST_URL --add-assignee $AUTHOR_LOGIN
         env:
