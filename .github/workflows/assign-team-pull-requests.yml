@@ -14,8 +14,8 @@ jobs:
       # Only assign pull requests by team members, ignore pull requests from forks
       - if: github.event.repository.fork == false
         name: Assign pull request to author
-        run: gh pr edit $NUMBER --add-assignee $AUTHOR_LOGIN
+        run: gh pr edit $PULL_REQUEST_URL --add-assignee $AUTHOR_LOGIN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NUMBER: ${{ github.event.pull_request.number }}
+          PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           AUTHOR_LOGIN: ${{ github.event.pull_request.user.login }}
